@@ -50,6 +50,17 @@ app.post("/blogs", function(req, res){
         }
     });
 });
+// SHOW ROUTE
+app.get("/blogs/:id", function(req, res){
+   Blog.findById(req.params.id, function(err, blogPost){
+      if(err){
+        res.redirect("/blogs");
+      }else{
+        res.render("show", {blog: blogPost});
+      }
+   });
+});
+
 
 app.listen(3000, function(){
 	console.log("Server Started");
