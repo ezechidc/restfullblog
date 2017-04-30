@@ -75,6 +75,7 @@ app.get("/blogs/:id/edit", function(req, res){
     }
    });
    });
+
 // UPDATE ROUTE
 app.put("/blogs/:id", function(req, res){
    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedPost){
@@ -84,6 +85,18 @@ app.put("/blogs/:id", function(req, res){
         res.redirect("/blogs/" + req.params.id);
       }
    });
+});
+
+//DELETE ROUTE
+app.delete("/blogs/:id", function(req, res){
+ //Destroy blog
+ Blog.findByIdAndRemove(req.params.id, function(err){
+     if(err){
+        res.redirect("/blogs");
+    }else{
+        res.redirect("/blogs");
+    }
+ });
 });
 
 app.listen(3000, function(){
